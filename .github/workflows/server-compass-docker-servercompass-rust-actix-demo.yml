@@ -41,7 +41,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: Dockerfile.servercompass
+          file: Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
 
@@ -133,7 +133,7 @@ jobs:
               '    image: ghcr.io/${{ github.repository }}:latest' \
               '    container_name: servercompass-rust-actix-demo-app' \
               '    ports:' \
-              '      - "8080:3000"' \
+              '      - "8080:8080"' \
               '    env_file:' \
               '      - .env' \
               '    restart: unless-stopped' \

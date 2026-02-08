@@ -2,7 +2,7 @@ name: Docker Deploy - servercompass-rust-actix-demo
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
     inputs:
       deploy_only:
@@ -50,6 +50,8 @@ jobs:
           file: Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          build-args: |
+            SERVER_COMPASS_NEXT_PUBLIC_ENV_B64=${{ secrets.ENV_NEXT_PUBLIC_B64_SERVERCOMPASS_RUST_ACTIX_DEMO }}
 
   deploy:
     needs: build
@@ -140,9 +142,9 @@ jobs:
               '    image: ghcr.io/${{ github.repository }}:latest' \
               '    container_name: servercompass-rust-actix-demo-app' \
               '    ports:' \
-              '      - "8080:8080"' \
+              '      - "3000:3000"' \
               '    environment:' \
-              '      PORT: "${PORT:-8080}"' \
+              '      PORT: "${PORT:-3000}"' \
               '    env_file:' \
               '      - .env' \
               '    restart: unless-stopped' \

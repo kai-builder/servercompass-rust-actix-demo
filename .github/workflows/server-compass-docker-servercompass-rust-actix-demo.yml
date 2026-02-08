@@ -1,8 +1,12 @@
 name: Docker Deploy - servercompass-rust-actix-demo
 
+concurrency:
+  group: server-compass-docker-servercompass-rust-actix-demo-master
+  cancel-in-progress: true
+
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
     inputs:
       deploy_only:
